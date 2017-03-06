@@ -3,6 +3,13 @@ import products.Plant;
 
 public class Veggie extends Plant {
 
-	//all vegetables are created as objects of this class
-	//enum
+	private enum VegType { TOMATO, ONION, CARROT};
+	
+	private VegType type;
+	
+	protected Veggie(int callories, VegType type) throws InvalidProductParamException {
+		super(callories);
+		this.type = type;
+	}
+	
 }

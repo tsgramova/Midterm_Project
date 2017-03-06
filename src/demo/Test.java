@@ -1,4 +1,4 @@
-package Demo;
+package demo;
 
 import fridge_recipe.AllRecipes;
 import user.AllUsers;
