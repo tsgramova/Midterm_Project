@@ -19,7 +19,6 @@ public class Recipe {
 	private double rating; //users only vote once
 	private HashMap<Product, Integer> products;
 	private FoodType type;
-	private int voters;
 	
 	
 	
