@@ -91,18 +91,6 @@ public class User {
 		}
 	}
 	
-	public Fridge takeALookInTheFridge () { //prints the products in the fridge
-		return this.myFridge;
-	}
-	
-	public void addProductsToFridge(Product p) {
-		this.myFridge.addProduct(p); //the user would be able to choose from a list with all products
-		//and add them to his own fridge via check box or he would be able to add a new product which doesn't exist
-	}
-	
-	//create new product... an admin will check and approve the product
-	
-	
 	public void addNewRecipe(Recipe r) {
 		AllRecipes.addNewRecipe(r);
 		this.added.add(r);
@@ -136,6 +124,7 @@ public class User {
 		}
 	}
 	private boolean checkUsername(String username) {
+		//request sent to database check if username is taken
 		if (username!=null && !username.isEmpty() && !AllUsers.checkForUsername(username) && username.length()>5) {
 			return true;
 		}
@@ -183,6 +172,7 @@ public class User {
 	}
 
 	public static boolean isValidEmailAddress(String email) {
+		//also check DB for the same email
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(email);
