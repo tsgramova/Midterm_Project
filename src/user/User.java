@@ -2,11 +2,10 @@ package user;
 
 import java.util.HashSet;
 
-
-import fridge_recipe.Fridge;
-import fridge_recipe.Recipe;
-import fridge_recipe.AllRecipes;
 import products.Product;
+import recipe.AllRecipes;
+import recipe.Fridge;
+import recipe.Recipe;
 
 
 public class User {
@@ -223,7 +222,40 @@ public class User {
 			return false;
 		return true;
 	}
-}
+	
+	public String getFirstName() {
+	    return firstName;
+	  }
+	  
+
+	  public String getLastName()
+	  {
+	    return lastName;
+	  }
+	  
+
+	  public String getEmailAddress()
+	  {
+	    return emailAddress;
+	  }
+	  
+
+	  public boolean isAdmin()
+	  {
+	    return isAdmin;
+	  }
+	  
+
+	  public User.Rang getRang()
+	  {
+	    return rang;
+	  }
+	  
+	  public String getPassword() {
+	    return password;
+	  }
+	}
+
 
 
 

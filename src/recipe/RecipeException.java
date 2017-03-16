@@ -1,4 +1,4 @@
-package fridge_recipe;
+package recipe;
 
 public class RecipeException extends Exception{
 

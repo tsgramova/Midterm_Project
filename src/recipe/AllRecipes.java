@@ -1,4 +1,4 @@
-package fridge_recipe;
+package recipe;
 
 import java.util.Collections;
 import java.util.HashSet;

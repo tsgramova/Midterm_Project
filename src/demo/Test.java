@@ -1,6 +1,6 @@
-package Demo;
+package demo;
 
-import fridge_recipe.AllRecipes;
+import recipe.AllRecipes;
 import user.AllUsers;
 import user.User;
 import user.UserException;
