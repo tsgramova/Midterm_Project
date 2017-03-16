@@ -4,7 +4,6 @@ import java.util.HashSet;
 
 import products.Product;
 import recipe.AllRecipes;
-import recipe.Fridge;
 import recipe.Recipe;
 
 
@@ -25,14 +24,12 @@ public class User {
 	private HashSet<Recipe> favorites;
 	private HashSet<Recipe> cooked;
 	private HashSet<Recipe> added;
-	private Fridge myFridge;
 	
 	
 	public User(String userName, String firstName, String lastName, String emailAddress, 
 			String password, boolean isAdmin) throws UserException {
 		if(checkUsername(userName)) {
 			this.userName = userName;
-			AllUsers.addUser(this);
 
 		} else {
 			throw new UserException("Invalid username!");
@@ -65,7 +62,6 @@ public class User {
 		this.favorites = new HashSet<>();
 		this.cooked = new HashSet<>();
 		this.added = new HashSet<>();
-		this.myFridge = new Fridge();
 		this.isAdmin= isAdmin;
 
 	}
@@ -125,7 +121,7 @@ public class User {
 	}
 	private boolean checkUsername(String username) {
 		//request sent to database check if username is taken
-		if (username!=null && !username.isEmpty() && !AllUsers.checkForUsername(username) && username.length()>5) {
+		if (username!=null && !username.isEmpty() && username.length()>5) {
 			return true;
 		}
 		return false;

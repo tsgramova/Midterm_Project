@@ -62,11 +62,6 @@ public class Recipe {
 		System.out.println("You have added this to favorites.");
 	}
 	
-	public void rate(int x) {
-		this.voters+=1;
-		this.rating+=x;
-		this.rating/=voters;
-	}
 
 	
 	private boolean checkName(String name) {

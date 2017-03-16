@@ -1,14 +1,12 @@
 package demo;
 
 import recipe.AllRecipes;
-import user.AllUsers;
 import user.User;
 import user.UserException;
 
 public class Test {
 
 	public static void main(String[] args) {
-		AllUsers.getInstance();
 		AllRecipes.getInstance();
 		
 		try {
