@@ -1,4 +1,5 @@
 package recipe;
+import java.sql.Array;
 import java.util.HashMap;
 import products.Product;
 
@@ -14,18 +15,19 @@ public class Recipe {
 	}
 	private String name;
 	private String description;
-	private Duration duration; //drop down menu with 15,30,60,90,>90 minutes
-	private Difficulty difficulty;
+	private int duration; //drop down menu with 15,30,60,90,>90 minutes
+	private int difficulty;
 	private double rating; //users only vote once
-	private HashMap<Product, Integer> products;
-	private FoodType type;
+	private Array products;
+	private String type;
 	
 	
+	//modified class to fit the result set
+	//deleted the "getRating" functionality - replace with DB function
 	
 	
-	
-	public Recipe(String name, String description, Duration duration, Difficulty difficulty,
-			HashMap<Product, Integer> products, FoodType type) throws RecipeException {
+	public Recipe(String name, String description, int duration, int difficulty,
+			double rating, String type, Array array) throws RecipeException {
 		
 		if(checkName(name)) {
 			this.name = name;
@@ -41,13 +43,14 @@ public class Recipe {
 		}
 		this.duration = duration;
 		this.difficulty = difficulty;
-		if(products!=null) {
-			this.products = products;
+		if(array!=null) {
+			this.products = array;
 		}
 		else {
 			throw new RecipeException("Invalid products!");
 		}
 		this.type = type;
+		
 	}
 
 	public Recipe reviewRecipe () {
@@ -62,13 +65,6 @@ public class Recipe {
 		System.out.println("You have added this to favorites.");
 	}
 	
-	public void rate(int x) {
-		this.voters+=1;
-		this.rating+=x;
-		this.rating/=voters;
-	}
-
-	
 	private boolean checkName(String name) {
 		if(name!=null && !name.isEmpty()) {
 			return true;
@@ -81,6 +77,34 @@ public class Recipe {
 			return true;
 		}
 		return false;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public double getRating() {
+		return rating;
+	}
+
+	public Array getProducts() {
+		return products;
+	}
+
+	public String getType() {
+		return type;
 	}
 	
 }

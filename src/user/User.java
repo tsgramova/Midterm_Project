@@ -25,7 +25,6 @@ public class User {
 	private HashSet<Recipe> favorites;
 	private HashSet<Recipe> cooked;
 	private HashSet<Recipe> added;
-	private Fridge myFridge;
 	
 	
 	public User(String userName, String firstName, String lastName, String emailAddress, 
