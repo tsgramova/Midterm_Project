@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String htmlFile;
-		if(UsersManager.getInstance().validLogin(username, password)){
+		if(UsersManager.getInstance().validateLogin(username, password)){
 			htmlFile = "Main.html";
 		}else{
 			htmlFile = "LoginFailed.html";

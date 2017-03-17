@@ -11,6 +11,7 @@ public class User {
 	
 	public enum Rang {BEGGINER,MIDDLE,MASTER};
 	
+	private long userId;
 	private String userName;
 	private String firstName;
 	private String lastName;
@@ -66,27 +67,138 @@ public class User {
 
 	}
 	
+	
+	
 	public String getUserName() {
-		return this.userName;
+		return userName;
+	}
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	public Rang getRang() {
+		return rang;
+	}
+
+
+
+	public void setRang(Rang rang) {
+		this.rang = rang;
+	}
+
+
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+
+
+	public HashSet<Recipe> getFavorites() {
+		return favorites;
+	}
+
+
+
+	public void setFavorites(HashSet<Recipe> favorites) {
+		this.favorites = favorites;
+	}
+
+
+
+	public HashSet<Recipe> getCooked() {
+		return cooked;
+	}
+
+
+
+	public void setCooked(HashSet<Recipe> cooked) {
+		this.cooked = cooked;
+	}
+
+
+
+	public HashSet<Recipe> getAdded() {
+		return added;
+	}
+
+
+
+	public void setAdded(HashSet<Recipe> added) {
+		this.added = added;
+	}
+
+
+
+	public long getUserId() {
+		return userId;
 	}
 	
-	public void setRang (Rang r) {
-		this.rang = r;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
-	
-	public void changeRang(Rang r) {
-		this.rang = r;
-	}
-	
-	public void changePassword (String password) {
-		if (validatePassword(password)) {
-			this.password = password;
-		}
-		else {
-			System.out.println("Invalid password.");
-		}
-	}
-	
+
+
+
 	public void addNewRecipe(Recipe r) {
 		AllRecipes.addNewRecipe(r);
 		this.added.add(r);
@@ -102,25 +214,8 @@ public class User {
 		r.cook();
 	}
 	
-	public void approveRecipe(Recipe r) {
-		if(this.isAdmin) {
-			//do something..
-		}
-	}
 	
-	public void removeRecipe(Recipe r) {
-		if (this.isAdmin) {
-			//do something..
-		}
-	}
-	
-	public void removeUser(User u) {
-		if (this.isAdmin) {
-			//do something..
-		}
-	}
 	private boolean checkUsername(String username) {
-		//request sent to database check if username is taken
 		if (username!=null && !username.isEmpty() && username.length()>5) {
 			return true;
 		}
@@ -209,38 +304,8 @@ public class User {
 		return true;
 	}
 	
-	public String getFirstName() {
-	    return firstName;
-	  }
-	  
-
-	  public String getLastName()
-	  {
-	    return lastName;
-	  }
-	  
-
-	  public String getEmailAddress()
-	  {
-	    return emailAddress;
-	  }
-	  
-
-	  public boolean isAdmin()
-	  {
-	    return isAdmin;
-	  }
-	  
-
-	  public User.Rang getRang()
-	  {
-	    return rang;
-	  }
-	  
-	  public String getPassword() {
-	    return password;
-	  }
-	}
+	
+}
 
 
 

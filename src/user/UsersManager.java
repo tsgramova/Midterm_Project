@@ -1,7 +1,9 @@
 package user;
 
-import DB.UserDao;
+import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
+
+import db.UserDao;
 
 public class UsersManager {
 	
@@ -25,7 +27,7 @@ public class UsersManager {
     return instance;
   }
   
-  public boolean validLogin(String username, String password) {
+  public boolean validateLogin(String username, String password) {
     if (!registeredUsers.containsKey(username)) { //if the username doesn't exist return false
       return false;
     }
@@ -33,9 +35,29 @@ public class UsersManager {
     return ((User)registeredUsers.get(username)).getPassword().equals(password);
   }
   
-  public void register(String username, String firstName, String lastName, String password, String email) throws UserException{
+ 
+  
+  public boolean validateRegistration(String username, String password, String firstName, String lastName, String email) {
+	 //TODO make validations for each parameter
+	  return false;
+  } 
+  
+  public void register(String username, String firstName, String lastName, String password, String email) throws UserException, SQLException{
     User user = new User(username, firstName, lastName, email, password, false);
     registeredUsers.put(username, user); //put user in collection
     UserDao.getInstance().saveUser(user); //save user in DB
   }
+  
+  public void delete(User u) {
+	  registeredUsers.remove(u);
+	  UserDao.getInstance().saveUser(u);
+  }
+  
+  //update user's information by given parameters.. 
+  //this is for the time when we learn sessions.. 
+  public void updateUser(User u) {
+	  //some validations of values for the fields to be changed
+	  UserDao.getInstance().updateUser(u);
+  }
+  
 }
