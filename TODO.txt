@@ -1,0 +1,7 @@
+TODO
+-register servlet
+-addRecipe servlet
+-findRecipe servlet (by given products) (html page - check boxes)
+-productDao - getAllProducts from DB method
+-product & recipe - add id as field and setId method
+-htmls - add recipe,show recipes, show products(check box)
