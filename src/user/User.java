@@ -3,8 +3,8 @@ package user;
 import java.util.HashSet;
 
 import products.Product;
-import recipe.AllRecipes;
 import recipe.Recipe;
+import recipe.RecipeManager;
 
 
 public class User {
@@ -200,7 +200,7 @@ public class User {
 
 
 	public void addNewRecipe(Recipe r) {
-		AllRecipes.addNewRecipe(r);
+		RecipeManager.addNewRecipe(r);
 		this.added.add(r);
 	}
 	

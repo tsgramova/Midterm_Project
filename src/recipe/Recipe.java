@@ -14,18 +14,14 @@ public class Recipe {
 	}
 	private String name;
 	private String description;
-	private Duration duration; //drop down menu with 15,30,60,90,>90 minutes
-	private Difficulty difficulty;
+	private int duration; //drop down menu with 15,30,60,90,>90 minutes
+	private int difficulty;
 	private double rating; //users only vote once
 	private HashMap<Product, Integer> products;
-	private FoodType type;
+	private int type;
 	
-	
-	
-	
-	
-	public Recipe(String name, String description, Duration duration, Difficulty difficulty,
-			HashMap<Product, Integer> products, FoodType type) throws RecipeException {
+	//food type changed to int for easier access
+	public Recipe(String name, String description, int duration, int difficulty, int type, HashMap<Product, Integer> products) throws RecipeException {
 		
 		if(checkName(name)) {
 			this.name = name;
@@ -76,6 +72,34 @@ public class Recipe {
 			return true;
 		}
 		return false;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public double getRating() {
+		return rating;
+	}
+
+	public HashMap<Product, Integer> getProducts() {
+		return products;
+	}
+
+	public int getType() {
+		return type;
 	}
 	
 }

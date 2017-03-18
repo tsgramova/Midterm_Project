@@ -1,8 +1,7 @@
 package recipe;
 
 import java.util.HashSet;
-import DB.RecipeDAO;
-import products.Product;
+import db.RecipeDAO;
 
 public class RecipeManager {
 
@@ -16,11 +15,11 @@ public class RecipeManager {
 	    return instance;
 	  }
 	
-	public static synchronized void addNewRecipe(Recipe recipe, Product ...products) {
-		RecipeDAO.getInstance().addRecipe(recipe, products);
+	public static synchronized void addNewRecipe(Recipe recipe) {
+		RecipeDAO.getInstance().addRecipe(recipe);
 	}
 	
-	public HashSet<Recipe> getRecipes() {
+	public static HashSet<Recipe> getRecipes() {
 		return RecipeDAO.getInstance().getAllRecipes();
 	}
 }

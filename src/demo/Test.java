@@ -1,13 +1,13 @@
 package demo;
 
-import recipe.AllRecipes;
+import recipe.RecipeManager;
 import user.User;
 import user.UserException;
 
 public class Test {
 
 	public static void main(String[] args) {
-		AllRecipes.getInstance();
+		RecipeManager.getRecipes();
 		
 		try {
 			User u1 = new User("Pesho_p", "Petur", "Petrov", "pesho_p739@abv.bg", "36*2hFkd0", false);
