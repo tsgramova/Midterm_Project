@@ -4,24 +4,17 @@ import products.Product;
 
 public class Recipe {
 	
-	public enum FoodType { APPETIZER, MAIN_MEAL, DESSERT} 
-	public enum Difficulty {EASY, MEDIUM, DIFFICULT}
-	public enum Duration { FIFTEEN(15),THIRTY(30),FOURTY_FIVE(45),SIXTY(60),NINETY(90),MORE_THAN_NINETY(120);
-		private int value;
-		private Duration(int value) {
-			this.value=value;
-		}
-	}
+	private long recipe_id;
 	private String name;
 	private String description;
 	private int duration; //drop down menu with 15,30,60,90,>90 minutes
 	private int difficulty;
 	private double rating; //users only vote once
 	private HashMap<Product, Integer> products;
-	private int type;
+	private String type;
 	
 	//food type changed to int for easier access
-	public Recipe(String name, String description, int duration, int difficulty, int type, HashMap<Product, Integer> products) throws RecipeException {
+	public Recipe(String name, String description, int duration, int difficulty, double rating, String type, HashMap<Product, Integer> products) throws RecipeException {
 		
 		if(checkName(name)) {
 			this.name = name;
@@ -29,21 +22,37 @@ public class Recipe {
 		else {
 			throw new RecipeException("Invalid name!");
 		}
+		
 		if(checkDescription(description)) {
 			this.description = description;
 		}
 		else {
 			throw new RecipeException("Invalid description!");
 		}
-		this.duration = duration;
-		this.difficulty = difficulty;
-		if(products!=null) {
-			this.products = products;
+		
+		if(duration > 0) {
+			this.duration = duration;
 		}
 		else {
-			throw new RecipeException("Invalid products!");
+			throw new RecipeException("Invalid duration!");
 		}
-		this.type = type;
+		
+		if(difficulty > 0 && difficulty < 4) {
+			this.difficulty = difficulty;
+		}
+		else {
+			throw new RecipeException("Invalid difficulty!");
+		}
+		
+		if(type != null && !type.isEmpty()) {
+			this.type = type;
+		}
+		else {
+			throw new RecipeException("Invalid description!");
+		}
+		
+		products = new HashMap<>();
+		this.products.putAll(products);
 	}
 
 	public Recipe reviewRecipe () {
@@ -98,8 +107,16 @@ public class Recipe {
 		return products;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
+	}
+	
+	public long getRecipeId() {
+		return this.recipe_id;
+	}
+	
+	public void setRecipeId(long id) {
+		this.recipe_id = id;
 	}
 	
 }

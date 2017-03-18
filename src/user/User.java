@@ -1,5 +1,6 @@
 package user;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 import products.Product;
@@ -199,8 +200,8 @@ public class User {
 
 
 
-	public void addNewRecipe(Recipe r) {
-		RecipeManager.addNewRecipe(r);
+	public void addNewRecipe(Recipe r, HashMap<Product, Integer> products) {
+		RecipeManager.addNewRecipe(r, products);
 		this.added.add(r);
 	}
 	

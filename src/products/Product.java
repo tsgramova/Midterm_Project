@@ -2,14 +2,15 @@ package products;
 
 public class Product {
 	
-	private int callories;
+	private long product_id;
 	private String type;
 	private String name;
+	private int callories;
 
 	//insert column "type" into db
 	//users can't create new products
 	
-	protected Product(int callories, String type, String name) throws InvalidProductParamException {
+	public Product(int callories, String type, String name) throws InvalidProductParamException {
 		if(callories > 0)
 			this.callories = callories;
 		else
@@ -28,6 +29,15 @@ public class Product {
 	
 	public static class InvalidProductParamException extends Exception{
 		//print a msg into the console or log file
+	}
+
+	public long getProductId() {
+		return this.product_id;
+	}
+	
+	public void setProductId(long id) {
+		if(id > 0)
+			this.product_id = id; 
 	}
 }
 
