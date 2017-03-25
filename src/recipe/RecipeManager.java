@@ -24,4 +24,30 @@ public class RecipeManager {
 	public static HashSet<Recipe> getRecipes() {
 		return RecipeDAO.getInstance().getAllRecipes();
 	}
+	
+	public boolean validateRecipe(String name, String description,int duration, int difficulty, int type) {
+
+		if(name == null || name.isEmpty()) {
+			return false;
+		}
+		
+		if(description == null || description.isEmpty()) {
+			return false;
+		}
+		
+		if(duration > 0) {
+			return false;
+		}
+		
+		if(difficulty > 0 && difficulty < 4) {
+			return false;
+		}
+		
+		if(!(type == 1 || type == 2 || type == 3)) {
+			return false;
+		}
+		
+		return true;
+		
+	}
 }
