@@ -52,7 +52,7 @@ public class RecipeDAO {
 		          resultSet.getInt("duration"), 
 		          resultSet.getInt("difficulty"),
 		          resultSet.getDouble("rating"),
-		          resultSet.getString("food_type"),
+		          resultSet.getInt("food_type"),
 		          products);
 		
 		    	  recipe.setRecipeId(resultSet.getLong("recipe_id"));
@@ -69,7 +69,7 @@ public class RecipeDAO {
 		return allRecipes;
 	}
 	
-	public synchronized void addRecipe(Recipe recipe, HashMap<Product, Integer> products) {
+	public synchronized void addRecipe(Recipe recipe) {
 		try {
 			//first insert recipe into db
 			
@@ -80,7 +80,7 @@ public class RecipeDAO {
 		     st.setInt(3, recipe.getDuration());
 		     st.setInt(4, recipe.getDifficulty());
 		     st.setDouble(5, recipe.getRating());
-		     st.setString(6, recipe.getType());
+		     st.setInt(6, recipe.getType());
 		     st.executeUpdate();
 		     
 		     ResultSet res = st.getGeneratedKeys();
@@ -88,6 +88,7 @@ public class RecipeDAO {
 				long recipe_id = res.getLong(1);
 				recipe.setRecipeId(recipe_id);	
 		     
+				HashMap<Product, Integer> products = recipe.getProducts();
 		     //then insert  into recipe_has_products table
 		     PreparedStatement productSt = DBManager.getInstance().getConnection().prepareStatement(
 		    		  "INSERT INTO recipe_has_products (recipe_id, product_id, quantity VALUES (?,?,?);");

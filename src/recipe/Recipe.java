@@ -11,10 +11,10 @@ public class Recipe {
 	private int difficulty;
 	private double rating; //users only vote once
 	private HashMap<Product, Integer> products;
-	private String type;
+	private int foodType;
 	
 	//food type changed to int for easier access
-	public Recipe(String name, String description, int duration, int difficulty, double rating, String type, HashMap<Product, Integer> products) throws RecipeException {
+	public Recipe(String name, String description, int duration, int difficulty, double rating, int foodType, HashMap<Product, Integer> products) throws RecipeException {
 		
 		if(checkName(name)) {
 			this.name = name;
@@ -44,11 +44,11 @@ public class Recipe {
 			throw new RecipeException("Invalid difficulty!");
 		}
 		
-		if(type != null && !type.isEmpty()) {
-			this.type = type;
+		if(foodType==1 || foodType==2 || foodType==3) {
+			this.foodType = foodType;
 		}
 		else {
-			throw new RecipeException("Invalid description!");
+			throw new RecipeException("Invalid food type!");
 		}
 		
 		products = new HashMap<>();
@@ -107,8 +107,8 @@ public class Recipe {
 		return products;
 	}
 
-	public String getType() {
-		return type;
+	public int getType() {
+		return foodType;
 	}
 	
 	public long getRecipeId() {
