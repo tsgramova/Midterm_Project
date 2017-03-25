@@ -7,28 +7,32 @@ public class Product {
 	private String name;
 	private int callories;
 
-	//insert column "type" into db
-	//users can't create new products
 	
 	public Product(int callories, String type, String name) throws InvalidProductParamException {
-		if(callories > 0)
+		if(callories > 0) {
 			this.callories = callories;
-		else
+		}
+		else {
 			throw new InvalidProductParamException();
+		}
 		
-		if(type != null && !type.isEmpty()) 
+		if(type != null && !type.isEmpty()) {
 			this.type = type;
-		else
+		}
+		else {
 			throw new InvalidProductParamException();
-		
-		if(name != null && !name.isEmpty()) 
+		}
+		if(name != null && !name.isEmpty()) {
 			this.name = name;
-		else
+		}
+		else {
 			throw new InvalidProductParamException();	
+		}
 	}
 	
 	public static class InvalidProductParamException extends Exception{
 		//print a msg into the console or log file
+		
 	}
 
 	public long getProductId() {

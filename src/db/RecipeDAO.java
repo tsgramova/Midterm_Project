@@ -35,8 +35,8 @@ public class RecipeDAO {
 		      		+ "FROM recipes ");
 		      while (resultSet.next()) {
 		    	  Statement productSt = DBManager.getInstance().getConnection().createStatement();
-		    	  ResultSet productRS = st.executeQuery("SELECT name, type, callories, quantity FROM products p WHERE p.recipe_id = " 
-		    	  + resultSet.getLong("recipe_id") + "JOIN recipe_has_product r ON(p.product_id = r.product_id;");
+		    	  ResultSet productRS = st.executeQuery("SELECT p.name, p.type, p.callories, rp.quantity FROM products p JOIN recipes_has_products rp ON p.product_id=rp.product_id WHERE p.recipe_id = " 
+		    	  + resultSet.getLong("recipe_id"));
 		    	  
 		    	//temp collection for the recipes products
 		  		HashMap<Product, Integer> products = new HashMap<>();
@@ -56,8 +56,9 @@ public class RecipeDAO {
 		          products);
 		
 		    	  recipe.setRecipeId(resultSet.getLong("recipe_id"));
+		    	  allRecipes.add(recipe);
 		      }
-			  }
+			}
 			catch (SQLException e) {
 			    System.out.println("Something went wrong while trying to get all recipes!");
 			    } 
@@ -91,9 +92,9 @@ public class RecipeDAO {
 		     PreparedStatement productSt = DBManager.getInstance().getConnection().prepareStatement(
 		    		  "INSERT INTO recipe_has_products (recipe_id, product_id, quantity VALUES (?,?,?);");
 		     for(Entry<Product, Integer> entry : products.entrySet()) {
-		    	 st.setLong(1, recipe_id);
-		    	 st.setLong(2, entry.getKey().getProductId());
-		    	 st.setInt(3, entry.getValue());
+		    	 productSt.setLong(1, recipe_id);
+		    	 productSt.setLong(2, entry.getKey().getProductId());
+		    	 productSt.setInt(3, entry.getValue());
 		     }
 		    } 
 		    catch (SQLException e) {
