@@ -17,9 +17,6 @@ import user.UsersManager;
 @WebServlet("/Register")
 public class RegisterServlet extends HttpServlet {  //a lot more to be done here....
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Override

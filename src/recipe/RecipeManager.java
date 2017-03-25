@@ -18,7 +18,7 @@ public class RecipeManager {
 	  }
 	
 	public static synchronized void addNewRecipe(Recipe recipe, HashMap<Product, Integer> products) {
-		RecipeDAO.getInstance().addRecipe(recipe, products);
+		RecipeDAO.getInstance().addRecipe(recipe);
 	}
 	
 	public static HashSet<Recipe> getRecipes() {
