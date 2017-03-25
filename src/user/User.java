@@ -68,8 +68,6 @@ public class User {
 
 	}
 	
-	
-	
 	public String getUserName() {
 		return userName;
 	}
@@ -123,13 +121,6 @@ public class User {
 	}
 
 
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-
 	public Rang getRang() {
 		return rang;
 	}
@@ -145,14 +136,6 @@ public class User {
 	public boolean isAdmin() {
 		return isAdmin;
 	}
-
-
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
-
 
 	public HashSet<Recipe> getFavorites() {
 		return favorites;
@@ -263,8 +246,7 @@ public class User {
 		}
 	}
 
-	public static boolean isValidEmailAddress(String email) {
-		//also check DB for the same email
+	private boolean isValidEmailAddress(String email) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(email);

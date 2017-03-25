@@ -1,6 +1,7 @@
 package user;
 
 import java.sql.SQLException;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import db.UserDao;
@@ -38,7 +39,7 @@ public class UsersManager {
  
   
   public boolean validateRegistration(String username, String password, String firstName, String lastName, String email) {
-			if(username == null || username.isEmpty()) {
+			if(username == null || username.isEmpty() || registeredUsers.contains(username)) {
 				return false;
 			}
 			if(firstName == null || firstName.isEmpty()) {
@@ -108,8 +109,12 @@ public class UsersManager {
 		}
 	}
 
-	public static boolean isValidEmailAddress(String email) {
-		//also check DB for the same email
+	private boolean isValidEmailAddress(String email) {
+		for(Entry<String, User> user : registeredUsers.entrySet()) {
+			if(user.getValue().getEmailAddress().equals(email)) {
+				return false;
+			}
+		}
       String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
       java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
       java.util.regex.Matcher m = p.matcher(email);

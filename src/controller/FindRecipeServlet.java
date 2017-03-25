@@ -19,9 +19,6 @@ import db.RecipeDAO;
 import products.Product;
 import recipe.Recipe;
 
-/**
- * Servlet implementation class FindRecipeServlet
- */
 @WebServlet("/FindRecipeServlet")
 public class FindRecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,9 +30,6 @@ public class FindRecipeServlet extends HttpServlet {
 		
 		try {
 			PreparedStatement statement = DBManager.getInstance().getConnection().prepareStatement(sql);
-			
-			
-			
 			for (String productName : checkedProducts) {
 				statement.setString(1, productName);
 				ResultSet res = statement.executeQuery();
@@ -60,8 +54,6 @@ public class FindRecipeServlet extends HttpServlet {
 			}
 		
 			//refers to html page with all desired recipes
-
-			
 		} catch (SQLException e) {
 			System.out.println("Some SQL exception occured.");
 		} catch (Exception e) {

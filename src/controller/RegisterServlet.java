@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import user.UserException;
 import user.UsersManager;
 
-@WebServlet("/Register")
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {  //a lot more to be done here....
 	
 	private static final long serialVersionUID = 1L;
@@ -32,13 +32,13 @@ public class RegisterServlet extends HttpServlet {  //a lot more to be done here
 			try {
 				UsersManager.getInstance().register(username, firstname,lastname, password, email);
 				htmlFile= "Success.html";
-				//forward to html saying successful registration or the index page
-			} catch (UserException | SQLException e) { // forward to html saying the registration failed
+				//forward to html saying successful registration
+			} catch (UserException | SQLException e) { 
 				System.out.println(e.getMessage());
 			}
 		}
 			else {
-				htmlFile = "LoginFailed.html";
+				htmlFile = "RegisterFailed.html"; // forward to html saying the registration failed
 			}
 			RequestDispatcher view = request.getRequestDispatcher(htmlFile);
 			view.forward(request, response);
