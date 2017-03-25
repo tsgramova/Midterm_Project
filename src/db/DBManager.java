@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-class DBManager
+public class DBManager
 {
   private static DBManager instance;
   private static final String DB_IP = "localhost";
@@ -37,7 +37,7 @@ class DBManager
     return instance;
   }
   
-  Connection getConnection() throws Exception {
+  public Connection getConnection() throws Exception {
     if (connection == null) {
       throw new Exception("Not connected to DB.");
     }
