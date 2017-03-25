@@ -38,8 +38,24 @@ public class UsersManager {
  
   
   public boolean validateRegistration(String username, String password, String firstName, String lastName, String email) {
-	 //TODO make validations for each parameter
-	  return false;
+			if(username == null || username.isEmpty()) {
+				return false;
+			}
+			if(firstName == null || firstName.isEmpty()) {
+				return false;
+			}
+			if(lastName == null || lastName.isEmpty()) {
+				return false;
+			}
+			if (!isValidEmailAddress(email)) {
+				return false;
+			}
+			
+			if(!validatePassword(password)){
+				return false;
+			}
+			
+	  return true;
   } 
   
   public void register(String username, String firstName, String lastName, String password, String email) throws UserException, SQLException{
@@ -59,5 +75,45 @@ public class UsersManager {
 	  //some validations of values for the fields to be changed
 	  UserDao.getInstance().updateUser(u);
   }
+  
+  private boolean validatePassword (String password) {
+		boolean upperCaseLetter = false; 
+		boolean lowerCaseLetter = false;
+		boolean digit = false;
+		if(password.length() < 5 || password.length() > 15) { 
+			return false;
+		}
+		for (int i = 0; i < password.length(); i++) {
+			if (password.charAt(i) >= 'A' && password.charAt(i) <= 'Z') {
+				upperCaseLetter = true;
+				continue;
+			}
+			if (password.charAt(i) >= 'a' && password.charAt(i) <= 'z' ) { 
+				lowerCaseLetter = true;
+				continue;
+			}
+			if (password.charAt(i) >= '0' && password.charAt(i) <= '9'){ 
+				digit = true;
+				continue;
+			}
+			if (upperCaseLetter && lowerCaseLetter && digit) { 
+				break;
+			}
+		}
+		if (upperCaseLetter && lowerCaseLetter && digit) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isValidEmailAddress(String email) {
+		//also check DB for the same email
+      String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+      java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+      java.util.regex.Matcher m = p.matcher(email);
+      return m.matches();
+	}
   
 }

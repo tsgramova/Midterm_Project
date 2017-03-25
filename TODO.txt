@@ -1,10 +1,3 @@
 TODO
--register servlet
--addRecipe servlet
--findRecipe servlet (by given products) (html page - check boxes)
--productDao - getAllProducts from DB method
--product & recipe - add id as field and setId method
--htmls - add recipe,show recipes, show products(check box)
-
-- add "type" column to product
-- add "quantity" column to recipe_has_products
+-html - add recipe
+-successful adding recipe, failed

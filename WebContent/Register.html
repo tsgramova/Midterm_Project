@@ -2,17 +2,17 @@
 <html>
 <head> 
 <meta charset = "UTF-8">
-<title> NomNom</title>
+<title> Регистрация</title>
 <style>
 
 body {
-    background-color: lightblue;
+    background-color: lightgrey;
 }
 form {
     border: 3px solid #f1f1f1;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -75,32 +75,32 @@ span.psw {
 </head>
 <body>
 
-<form class= "form-signin" action="Register" method = "POST">
-  <div class="imgcontainer">
-    <img src="nomnom.png" alt="Avatar" class="avatar">
-  </div>
-
-  <div class="container">
-  	<h2 class="form-signin-heading">Register new user</h2>
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-    <label><b>Password again</b></label>
-    <input type="text" placeholder="Enter password again" name="password" required>
-     <label><b>First name</b></label>
-    <input type="text" placeholder="Enter first name" name="firstname" required>
-    <label><b>Last name</b></label>
-    <input type="password" placeholder="Enter last name" name="lastname" required> 
-    <label><b>Email</b></label>
-    <input type="password" placeholder="Enter email" name="email" required>
-    <button type="submit">Register</button>
-    
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-  </div>
-</form>
-</body>
+	<form class= "form-signin" action="Register" method = "POST">
+	  <div class="imgcontainer">
+	    <img src="nomnom.png" alt="Avatar" class="avatar">
+	  </div>
+	
+	  <div class="container">
+	  	<h2 class="form-signin-heading">Регистрация на нов потребител</h2>
+	    <label><b>Потребителско име</b></label>
+	    <input type="text" placeholder="Въведете потребителско име" name="username" required>
+	    <label><b>Парола</b></label>
+	    <input type="password" placeholder="Въведете парола" name="password" required>
+	    <label><b>Повторете паролата</b></label>
+	    <input type="password" placeholder="Повторете паролата" name="password" required>
+	     <label><b>Собствено име</b></label>
+	    <input type="text" placeholder="Въведете собствено име" name="firstname" required>
+	    <label><b>Фамилия</b></label>
+	    <input type="text" placeholder="Въведете фамилия" name="lastname" required> 
+	    <label><b>Имейл адрес</b></label>
+	    <input type="email" placeholder="Въведете имейл" name="email" required>
+	    <button type="submit">Регистрация</button>
+	  </div>
+	</form>
+	<form method="link" action="Login.html">
+		<div class="container" style="background-color:#f1f1f3">
+  	 	 <button type="submit" class="cancelbtn">Отказ</button>
+ 		 </div>
+	</form>>
+  </body>
 </html>

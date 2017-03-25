@@ -27,7 +27,6 @@ public class RecipeDAO {
 	}
 	
 	public synchronized HashSet<Recipe> getAllRecipes() {
-		
 		if(allRecipes == null) {
 			try {
 		      Statement st = DBManager.getInstance().getConnection().createStatement();
@@ -35,7 +34,7 @@ public class RecipeDAO {
 		      		+ "FROM recipes ");
 		      while (resultSet.next()) {
 		    	  Statement productSt = DBManager.getInstance().getConnection().createStatement();
-		    	  ResultSet productRS = st.executeQuery("SELECT p.name, p.type, p.callories, rp.quantity FROM products p JOIN recipes_has_products rp ON p.product_id=rp.product_id WHERE p.recipe_id = " 
+		    	  ResultSet productRS = productSt.executeQuery("SELECT p.name, p.type, p.callories, rp.quantity FROM products p JOIN recipes_has_products rp ON p.product_id=rp.product_id WHERE p.recipe_id = " 
 		    	  + resultSet.getLong("recipe_id"));
 		    	  
 		    	//temp collection for the recipes products
