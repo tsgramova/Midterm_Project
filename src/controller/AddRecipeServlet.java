@@ -58,11 +58,15 @@ public class AddRecipeServlet extends HttpServlet {
 				}
 				
 				Recipe r = new Recipe(name, description, duration, difficulty, rating, foodType, recipeProducts);
+				String htmlFile = "";
 				if(RecipeManager.getInstance().validateRecipe(name, description, duration, difficulty, foodType,rating)) {
 					RecipeDAO.getInstance().addRecipe(r);
+					htmlFile = "Success.html";
 				}
-						//forward to html saying successful registration or the index page
-				RequestDispatcher view = request.getRequestDispatcher("index.html");
+				else {
+					htmlFile = "AddRecipeFailed.html";
+				}
+				RequestDispatcher view = request.getRequestDispatcher(htmlFile);
 				view.forward(request, response);
 			
 			} catch (Exception e) {

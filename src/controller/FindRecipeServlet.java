@@ -53,7 +53,6 @@ public class FindRecipeServlet extends HttpServlet {
 					if(!recipe.getProducts().containsKey(product)) {
 						containsProducts = false;
 					}
-					
 				}
 				if(containsProducts) {
 					desiredRecipes.add(recipe);

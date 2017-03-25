@@ -27,16 +27,22 @@ public class RegisterServlet extends HttpServlet {  //a lot more to be done here
 		String lastname = request.getParameter("lastname");
 		String email = request.getParameter("email");
 		
+		String htmlFile="";
 		if(UsersManager.getInstance().validateRegistration(username, password, firstname, lastname, email)) {
 			try {
 				UsersManager.getInstance().register(username, firstname,lastname, password, email);
+				htmlFile= "Success.html";
 				//forward to html saying successful registration or the index page
 			} catch (UserException | SQLException e) { // forward to html saying the registration failed
 				System.out.println(e.getMessage());
 			}
-			RequestDispatcher view = request.getRequestDispatcher("index.html");
+		}
+			else {
+				htmlFile = "LoginFailed.html";
+			}
+			RequestDispatcher view = request.getRequestDispatcher(htmlFile);
 			view.forward(request, response);
 		}
 	}
 
-}
+
