@@ -25,7 +25,7 @@ public class RecipeManager {
 		return RecipeDAO.getInstance().getAllRecipes();
 	}
 	
-	public boolean validateRecipe(String name, String description,int duration, int difficulty, int type) {
+	public boolean validateRecipe(String name, String description,int duration, int difficulty, int type, int rating) {
 
 		if(name == null || name.isEmpty()) {
 			return false;
@@ -47,6 +47,9 @@ public class RecipeManager {
 			return false;
 		}
 		
+		if(rating > -1) {
+			return false;
+		}
 		return true;
 		
 	}
