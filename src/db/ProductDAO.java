@@ -3,6 +3,7 @@ package db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,14 +39,14 @@ public class ProductDAO {
 	  
 	    catch (SQLException e) {
 	      System.out.println("Cannot make statement." + e.getMessage());
-	      return products;
+		    return Collections.unmodifiableSet(products);
 	    } 
 	    catch (Exception e) {
 	      System.out.println(e.getMessage());
 	    }
 	    
 	    System.out.println("Products loaded successfully");
-	    return products;
+	    return Collections.unmodifiableSet(products);
 	  }
 	 
 }

@@ -183,8 +183,8 @@ public class User {
 
 
 
-	public void addNewRecipe(Recipe r, HashMap<Product, Integer> products) {
-		RecipeManager.addNewRecipe(r, products);
+	public void addNewRecipe(Recipe r) {
+		RecipeManager.getInstance().addNewRecipe(r);
 		this.added.add(r);
 	}
 	

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import user.User;
@@ -41,14 +42,14 @@ public class UserDao {
     }
     catch (SQLException e) {
       System.out.println("Cannot make statement." + e.getMessage());
-      return users;
+		return Collections.unmodifiableSet(users);
     } 
     catch (Exception e) {
       System.out.println(e.getMessage());
     }
     
     System.out.println("Users loaded successfully");
-    return users;
+	return Collections.unmodifiableSet(users);
   }
   
   public synchronized void saveUser(User user) {

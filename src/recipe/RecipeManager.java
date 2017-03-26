@@ -1,15 +1,23 @@
 package recipe;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
+
 import db.RecipeDAO;
 import products.Product;
 
 public class RecipeManager {
 
 	private static RecipeManager instance;
+	private static HashSet<Recipe> allRecipes;
+
 	
-	private RecipeManager(){}
+	private RecipeManager(){
+		allRecipes = new HashSet<>();
+		allRecipes.addAll(RecipeDAO.getInstance().getAllRecipes());
+	}
 	
 	public static synchronized RecipeManager getInstance() {
 	    if (instance == null)
@@ -17,16 +25,21 @@ public class RecipeManager {
 	    return instance;
 	  }
 	
-	public static synchronized void addNewRecipe(Recipe recipe, HashMap<Product, Integer> products) {
+	public synchronized void addNewRecipe(Recipe recipe) {
 		RecipeDAO.getInstance().addRecipe(recipe);
+		allRecipes.add(recipe);
 	}
 	
-	public static HashSet<Recipe> getRecipes() {
-		return RecipeDAO.getInstance().getAllRecipes();
+	public Set<Recipe> getRecipes() {
+		return Collections.unmodifiableSet(allRecipes);
 	}
 	
 	public boolean validateRecipe(String name, String description,int duration, int difficulty, int type, int rating) {
-
+		for(Recipe r : allRecipes) {
+			if(r.getName().equals(name)) {
+				return false;
+			}
+		}
 		if(name == null || name.isEmpty()) {
 			return false;
 		}
@@ -35,11 +48,11 @@ public class RecipeManager {
 			return false;
 		}
 		
-		if(duration > 0) {
+		if(duration < 0) {
 			return false;
 		}
 		
-		if(difficulty > 0 && difficulty < 4) {
+		if(difficulty < 0 || difficulty > 3) {
 			return false;
 		}
 		
@@ -47,7 +60,7 @@ public class RecipeManager {
 			return false;
 		}
 		
-		if(rating > -1) {
+		if(rating < 0) {
 			return false;
 		}
 		return true;

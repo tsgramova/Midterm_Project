@@ -51,8 +51,10 @@ public class Recipe {
 			throw new RecipeException("Invalid food type!");
 		}
 		
-		products = new HashMap<>();
-		this.products.putAll(products);
+		this.products = new HashMap<>();
+		if(products!=null) {
+			this.products.putAll(products);
+		}
 	}
 
 	public Recipe reviewRecipe () {

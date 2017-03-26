@@ -29,15 +29,9 @@ public class AddRecipeServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		int duration = Integer.parseInt(request.getParameter("duration"));
 		int difficulty = Integer.parseInt(request.getParameter("difficulty"));
-		int rating = Integer.parseInt(request.getParameter("rating"));
-		int foodType = Integer.parseInt(request.getParameter("foodType"));
-		ArrayList<String> productNames = new ArrayList<>();
-		productNames.add(request.getParameter("product1"));
-		productNames.add(request.getParameter("product2"));
-		productNames.add(request.getParameter("product3"));
-		productNames.add(request.getParameter("product4"));
-		productNames.add(request.getParameter("product5"));
-		productNames.add(request.getParameter("product6"));
+		int foodType = Integer.parseInt(request.getParameter("foodtype"));
+		String [] productNames;
+		productNames = request.getParameterValues("product");
 		
 		String sql = "SELECT * FROM products WHERE name = ?;";
 		HashMap<Product, Integer> recipeProducts = new HashMap<>();
@@ -45,22 +39,23 @@ public class AddRecipeServlet extends HttpServlet {
 			PreparedStatement statement;
 			try {
 				statement = DBManager.getInstance().getConnection().prepareStatement(sql);
-				for (int i =0; i<6; i++) {
-					if(productNames.get(i) !=null) {
-						statement.setString(1, productNames.get(i));
+				for (int i =1; i<productNames.length-1; i++) {
+					if(productNames[i+1] != null) {
+						statement.setString(1, productNames[i]);
 						ResultSet res = statement.executeQuery();
 						res.next();
 						Product p = new Product(res.getInt("calories"), 
 								res.getString("type"), 
 								res.getString("name"));
-						recipeProducts.put(p, Integer.parseInt(request.getParameter("quantity"+(i+1))));
+						String quantity = "quantity" + i;
+						recipeProducts.put(p, Integer.parseInt(request.getParameter(quantity)));
 					}
 				}
 				
-				Recipe r = new Recipe(name, description, duration, difficulty, rating, foodType, recipeProducts);
+				Recipe r = new Recipe(name, description, duration, difficulty,0, foodType, recipeProducts);
 				String htmlFile = "";
-				if(RecipeManager.getInstance().validateRecipe(name, description, duration, difficulty, foodType,rating)) {
-					RecipeDAO.getInstance().addRecipe(r);
+				if(RecipeManager.getInstance().validateRecipe(name, description, duration, difficulty, foodType, 0)) {
+					RecipeManager.getInstance().addNewRecipe(r);
 					htmlFile = "Success.html";
 				}
 				else {
@@ -70,7 +65,6 @@ public class AddRecipeServlet extends HttpServlet {
 				view.forward(request, response);
 			
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

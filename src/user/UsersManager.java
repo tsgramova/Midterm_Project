@@ -33,7 +33,7 @@ public class UsersManager {
       return false;
     }
     //return if user's password matches the given password 
-    return ((User)registeredUsers.get(username)).getPassword().equals(password);
+    return (registeredUsers.get(username)).getPassword().equals(password);
   }
   
  

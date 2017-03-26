@@ -31,13 +31,13 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String htmlFile;
 		if(UsersManager.getInstance().validateLogin(username, password)){
-			htmlFile = "Main.html";
+			htmlFile = "Success.html";
 		}else{
 			htmlFile = "LoginFailed.html";
 		}
 		RequestDispatcher view = request.getRequestDispatcher(htmlFile);
 		view.forward(request, response);
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
