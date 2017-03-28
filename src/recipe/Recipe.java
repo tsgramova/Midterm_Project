@@ -1,4 +1,5 @@
 package recipe;
+import java.io.InputStream;
 import java.util.HashMap;
 import products.Product;
 
@@ -12,9 +13,10 @@ public class Recipe {
 	private double rating; //users only vote once
 	private HashMap<Product, Integer> products;
 	private int foodType;
+	private InputStream picture;
 	
 	//food type changed to int for easier access
-	public Recipe(String name, String description, int duration, int difficulty, double rating, int foodType, HashMap<Product, Integer> products) throws RecipeException {
+	public Recipe(String name, String description, int duration, int difficulty, double rating, int foodType, HashMap<Product, Integer> products, InputStream picture) throws RecipeException {
 		
 		if(checkName(name)) {
 			this.name = name;
@@ -55,6 +57,7 @@ public class Recipe {
 		if(products!=null) {
 			this.products.putAll(products);
 		}
+		this.picture= picture;
 	}
 
 	public Recipe reviewRecipe () {
@@ -119,6 +122,9 @@ public class Recipe {
 	
 	public void setRecipeId(long id) {
 		this.recipe_id = id;
+	}
+	public InputStream getPicture() {
+		return picture;
 	}
 	
 }

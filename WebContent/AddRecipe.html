@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head> 
-<meta charset = "UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset = "utf-8">
 <link rel="icon" href="nomnom.png">
 <title> Добави рецепта</title>
 <style>
@@ -11,6 +11,9 @@ body {
 }
 form {
     border: 3px solid #f1f1f1;
+}
+.style1 {
+	width: 20%;
 }
 
 input[type=text] {
@@ -65,7 +68,7 @@ span.psw {
 </head>
 <body>
 
-	<form action="AddRecipeServlet" method = "POST">
+	<form action="AddRecipeServlet" method = "POST" enctype="multipart/form-data">
 	  <div class="imgcontainer">
 	    <img src="nomnom.png" alt="Avatar" class="avatar">
 	  </div>
@@ -82,20 +85,26 @@ span.psw {
 	    <input type="text" placeholder="Въведете трудност от 1 до 3" name="difficulty" required>
 	    <label><b>Тип на ястието</b></label>
 	    <input type="text" placeholder="Въведете тип на ястието(първо,второ,трето)" name="foodtype" required> 
-	    <label><b>Продукти</b></label>
+	    <label><b>Продукти:</b></label>
 	    </br>
-	    <input type="checkbox" name="product" value="egg"> Яйца</br>
-	    <input type="text" placeholder="Въведете количество" name="quantity1" >
-	    <input type="checkbox" name="product" value="yogurt"> Кисело мляко</br>
-	    <input type="text" placeholder="Въведете количество" name="quantity2" >
-	     <input type="checkbox" name="product" value="chicken"> Пилешко месо</br>
-	    <input type="text" placeholder="Въведете количество" name="quantity3" >
-	     <input type="checkbox" name="product" value="tomatoes"> Домати<br>
-	    <input type="text" placeholder="Въведете количество" name="quantity4" >
-	     <input type="checkbox" name="product" value="cucumbers"> Краставици</br>
-	    <input type="text" placeholder="Въведете количество" name="quantity5" >
-	     <input type="checkbox" name="product" value="cheese"> Сирене </br>
-	    <input type="text" placeholder="Въведете количество" name="quantity6" >
+	    
+	    <input type="checkbox" name="products" value="egg"> Яйца
+	    <input type="checkbox" name="products" value="yogurt"> Кисело мляко
+	    <input type="checkbox" name="products" value="chicken"> Пилешко месо
+	    <input type="checkbox" name="products" value="tomatoes"> Домати
+	    <input type="checkbox" name="products" value="cucumbers"> Краставици
+	    <input type="checkbox" name="products" value="cheese"> Сирене </br>
+	        <label><b>Количество:</b></label>
+	        </br>
+	    <input type="text" name="quantity1" style="width:8%;" >
+	    <input type="text" name="quantity2" style="width:13%;">
+	    <input type="text" name="quantity3" style="width:13%;">
+	    <input type="text" name="quantity4" style="width:8%;" >
+	    <input type="text" name="quantity5" style="width:15%;">
+	    <input type="text" name="quantity6" style="width:8%;" >
+	    </br>
+	    <input type="file"  placeholder="снимка" name="picture" required >
+	    </br>
 	    <button type="submit">Добави рецепта</button>
 	  </div>
 	</form>

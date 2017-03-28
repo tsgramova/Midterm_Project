@@ -55,7 +55,7 @@ public class UserDao {
   public synchronized void saveUser(User user) {
       PreparedStatement st;
 	try {
-		st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO users (username,first_name,last_name,email,password,role) VALUES (?,?,?,?,?,?);");
+		st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO users (username,first_name,last_name,email,password,role) VALUES (?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
 	    st.setString(1, user.getUserName());
 	    st.setString(2, user.getFirstName());
 	    st.setString(3, user.getLastName());

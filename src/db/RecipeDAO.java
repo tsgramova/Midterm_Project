@@ -31,7 +31,7 @@ public class RecipeDAO {
 		HashSet<Recipe> recipes = new HashSet<>();
 			try {
 		      Statement st = DBManager.getInstance().getConnection().createStatement();
-		      ResultSet resultSet = st.executeQuery("SELECT recipe_id, name, description, duration, difficulty, rating, food_type "
+		      ResultSet resultSet = st.executeQuery("SELECT recipe_id, name, description, duration, difficulty, rating, food_type,picture "
 		      		+ "FROM recipes ");
 		      while (resultSet.next()) {
 		    	//  Statement productSt = DBManager.getInstance().getConnection().createStatement();
@@ -54,8 +54,7 @@ public class RecipeDAO {
 		          resultSet.getInt("difficulty"),
 		          resultSet.getDouble("rating"),
 		          resultSet.getInt("food_type"),
-		          products);
-		
+		          products,resultSet.getBinaryStream("picture"));
 		    	  recipe.setRecipeId(resultSet.getLong("recipe_id"));
 		    	  recipes.add(recipe);
 		      }
@@ -74,26 +73,23 @@ public class RecipeDAO {
 	public synchronized void addRecipe(Recipe recipe) {
 		try {
 			//first insert recipe into db
-			
-		     PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(
-		    		  "INSERT INTO recipes (name, description, duration, difficulty, rating, food_type) VALUES (?,?,?,?,?,?);");
+			String sql = "INSERT INTO recipes (name, description, duration, difficulty, rating, food_type, picture) VALUES (?,?,?,?,?,?,?);";
+		     PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		     st.setString(1, recipe.getName());
 		     st.setString(2, recipe.getDescription());
 		     st.setInt(3, recipe.getDuration());
 		     st.setInt(4, recipe.getDifficulty());
 		     st.setDouble(5, recipe.getRating());
 		     st.setInt(6, recipe.getType());
+		     st.setBinaryStream(7, recipe.getPicture());
 		     st.executeUpdate();
-		     
-		     ResultSet res = st.getGeneratedKeys();
-				res.next();
-				long recipe_id = res.getLong(1);
-				recipe.setRecipeId(recipe_id);	
-				
+			// ResultSet res = st.getGeneratedKeys();
+			//res.next();
+			//long recipe_id = res.getLong(1);
+			//recipe.setRecipeId(recipe_id);	
 				HashMap<Product, Integer> products = recipe.getProducts();
 		     //then insert  into recipe_has_products table
 				for(Entry<Product, Integer> entry : products.entrySet()) {
-					System.out.println(entry.getKey().getName());
 		     PreparedStatement productSt = DBManager.getInstance().getConnection().prepareStatement(
 		    		  "INSERT INTO recipes_has_products (recipe_id, product_id, quantity) VALUES ((SELECT recipe_id from recipes r WHERE r.name = ?) , (SELECT product_id from products WHERE name = ?),?);");
 		     
