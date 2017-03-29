@@ -14,18 +14,18 @@ public class RecipeManager {
 	private static HashSet<Recipe> allRecipes;
 
 	
-	private RecipeManager(){
+	private RecipeManager() throws RecipeException{
 		allRecipes = new HashSet<>();
 		allRecipes.addAll(RecipeDAO.getInstance().getAllRecipes());
 	}
 	
-	public static synchronized RecipeManager getInstance() {
+	public static synchronized RecipeManager getInstance() throws RecipeException {
 	    if (instance == null)
 	      instance = new RecipeManager();
 	    return instance;
 	  }
 	
-	public synchronized void addNewRecipe(Recipe recipe) {
+	public synchronized void addNewRecipe(Recipe recipe) throws RecipeException {
 		RecipeDAO.getInstance().addRecipe(recipe);
 		allRecipes.add(recipe);
 	}

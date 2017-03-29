@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import products.Product;
 import recipe.Recipe;
+import recipe.RecipeException;
 import recipe.RecipeManager;
 
 
@@ -183,7 +184,7 @@ public class User {
 
 
 
-	public void addNewRecipe(Recipe r) {
+	public void addNewRecipe(Recipe r) throws RecipeException {
 		RecipeManager.getInstance().addNewRecipe(r);
 		this.added.add(r);
 	}

@@ -50,7 +50,7 @@ public class Recipe {
 			this.foodType = foodType;
 		}
 		else {
-			throw new RecipeException("Invalid food type!");
+			throw new RecipeException("Invalid food type! Enter a number!");
 		}
 		
 		this.products = new HashMap<>();

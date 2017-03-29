@@ -12,6 +12,7 @@ import java.util.Set;
 import products.Product;
 import java.sql.PreparedStatement;
 import recipe.Recipe;
+import recipe.RecipeException;
 
 
 public class RecipeDAO {
@@ -27,7 +28,7 @@ public class RecipeDAO {
 		return instance;
 	}
 	
-	public synchronized Set<Recipe> getAllRecipes() {
+	public synchronized Set<Recipe> getAllRecipes() throws RecipeException{
 		HashSet<Recipe> recipes = new HashSet<>();
 			try {
 		      Statement st = DBManager.getInstance().getConnection().createStatement();
@@ -47,16 +48,17 @@ public class RecipeDAO {
 			  						productRS.getString("name")), 
 			  						productRS.getInt("quantity"));
 		  		}
+		    	 
+			    	  Recipe recipe = new Recipe(resultSet.getString("name"), 
+			          resultSet.getString("description"), 
+			          resultSet.getInt("duration"), 
+			          resultSet.getInt("difficulty"),
+			          resultSet.getDouble("rating"),
+			          resultSet.getInt("food_type"),
+			          products,resultSet.getBinaryStream("picture"));
+			    	  recipe.setRecipeId(resultSet.getLong("recipe_id"));
+			    	  recipes.add(recipe);
 		    	  
-		    	  Recipe recipe = new Recipe(resultSet.getString("name"), 
-		          resultSet.getString("description"), 
-		          resultSet.getInt("duration"), 
-		          resultSet.getInt("difficulty"),
-		          resultSet.getDouble("rating"),
-		          resultSet.getInt("food_type"),
-		          products,resultSet.getBinaryStream("picture"));
-		    	  recipe.setRecipeId(resultSet.getLong("recipe_id"));
-		    	  recipes.add(recipe);
 		      }
 			}
 			catch (SQLException e) {
@@ -70,7 +72,7 @@ public class RecipeDAO {
 		return Collections.unmodifiableSet(recipes);
 	}
 	
-	public synchronized void addRecipe(Recipe recipe) {
+	public synchronized void addRecipe(Recipe recipe) throws RecipeException{
 		try {
 			//first insert recipe into db
 			String sql = "INSERT INTO recipes (name, description, duration, difficulty, rating, food_type, picture) VALUES (?,?,?,?,?,?,?);";
