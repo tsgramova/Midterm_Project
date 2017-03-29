@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import db.DBManager;
@@ -39,8 +40,7 @@ public class AddRecipeServlet extends HttpServlet {
 		
 		String sql = "SELECT * FROM products WHERE name = ?;";
 		HashMap<Product, Integer> recipeProducts = new HashMap<>();
-		
-
+	
 			PreparedStatement statement;
 			try {
 				statement = DBManager.getInstance().getConnection().prepareStatement(sql);
@@ -61,15 +61,23 @@ public class AddRecipeServlet extends HttpServlet {
 				InputStream picStream = picture.getInputStream();
 				Recipe r = new Recipe(name, description, duration, difficulty,0, foodType, recipeProducts,picStream);
 				String htmlFile = "";
-				if(RecipeManager.getInstance().validateRecipe(name, description, duration, difficulty, foodType, 0)) {
-					RecipeManager.getInstance().addNewRecipe(r);
-					htmlFile = "Success.html";
+				HttpSession session = request.getSession();
+				String username;
+				
+				if(session.getAttribute("logged")==null || !(boolean) session.getAttribute("logged")) {
+					htmlFile = "Login.html";
+				} else {
+					username = (String) session.getAttribute("username");
+					if(RecipeManager.getInstance().validateRecipe(name, description, duration, difficulty, foodType, 0)) {
+						RecipeManager.getInstance().addNewRecipe(r,username);
+						htmlFile = "Success.html";
+					}
+					else {
+						htmlFile = "AddRecipeFailed.html";
+					}
+					RequestDispatcher view = request.getRequestDispatcher(htmlFile);
+					view.forward(request, response);
 				}
-				else {
-					htmlFile = "AddRecipeFailed.html";
-				}
-				RequestDispatcher view = request.getRequestDispatcher(htmlFile);
-				view.forward(request, response);
 			
 			} catch (Exception e) {
 				e.printStackTrace();

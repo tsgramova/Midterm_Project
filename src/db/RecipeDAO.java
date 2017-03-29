@@ -13,6 +13,7 @@ import products.Product;
 import java.sql.PreparedStatement;
 import recipe.Recipe;
 import recipe.RecipeException;
+import user.UsersManager;
 
 
 public class RecipeDAO {
@@ -35,7 +36,6 @@ public class RecipeDAO {
 		      ResultSet resultSet = st.executeQuery("SELECT recipe_id, name, description, duration, difficulty, rating, food_type,picture "
 		      		+ "FROM recipes ");
 		      while (resultSet.next()) {
-		    	//  Statement productSt = DBManager.getInstance().getConnection().createStatement();
 		    	  PreparedStatement productSt = DBManager.getInstance().getConnection().prepareStatement("SELECT p.name, p.type, p.calories, rp.quantity FROM products p JOIN recipes_has_products rp ON p.product_id=rp.product_id WHERE rp.recipe_id = ?");
 		    	  productSt.setLong(1, resultSet.getLong("recipe_id"));
 		    	  ResultSet productRS = productSt.executeQuery();
@@ -72,7 +72,7 @@ public class RecipeDAO {
 		return Collections.unmodifiableSet(recipes);
 	}
 	
-	public synchronized void addRecipe(Recipe recipe) throws RecipeException{
+	public synchronized void addRecipe(Recipe recipe,String username) throws RecipeException{
 		try {
 			//first insert recipe into db
 			String sql = "INSERT INTO recipes (name, description, duration, difficulty, rating, food_type, picture) VALUES (?,?,?,?,?,?,?);";
@@ -85,10 +85,11 @@ public class RecipeDAO {
 		     st.setInt(6, recipe.getType());
 		     st.setBinaryStream(7, recipe.getPicture());
 		     st.executeUpdate();
-			// ResultSet res = st.getGeneratedKeys();
-			//res.next();
-			//long recipe_id = res.getLong(1);
-			//recipe.setRecipeId(recipe_id);	
+			 ResultSet res = st.getGeneratedKeys();
+			res.next();
+			long recipe_id = res.getLong(1);
+			recipe.setRecipeId(recipe_id);	
+			
 				HashMap<Product, Integer> products = recipe.getProducts();
 		     //then insert  into recipe_has_products table
 				for(Entry<Product, Integer> entry : products.entrySet()) {
@@ -99,8 +100,21 @@ public class RecipeDAO {
 		    	 productSt.setString(2,entry.getKey().getName());
 		    	 productSt.setInt(3, entry.getValue());
 		    	 productSt.executeUpdate();
+		    	 st.close();
+		    	 productSt.close();
+		    	 res.close();
 		     }
-		    } 
+				//insert into users_has_recipes
+				PreparedStatement statement = DBManager.getInstance().getConnection().prepareStatement(
+						"INSERT INTO users_has_recipes (users_users_id, recipes_recipe_id, recipe_type) VALUES ((SELECT user_id FROM users u WHERE u.name = ?), (SELECT recipe_id FROM recipes r WHERE name =?),?);");
+				statement.setString(1, username);
+				statement.setString(2, recipe.getName());
+				statement.setString(3, "added");
+				statement.executeUpdate();
+				statement.close();
+				UsersManager.getInstance().getRegisteredUsers().get(username).addNewRecipe(recipe);
+		
+		} 
 		    catch (SQLException e) {
 		    	e.printStackTrace();
 		    	System.out.println("Recipe not added");

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/AddRecipe.html=UTF-8
+encoding//WebContent/errorPage.jsp=UTF-8
 encoding//src/controller/AddRecipeServlet.java=UTF-8
 encoding//src/db/DBManager.java=UTF-8

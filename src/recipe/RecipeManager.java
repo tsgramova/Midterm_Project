@@ -25,8 +25,8 @@ public class RecipeManager {
 	    return instance;
 	  }
 	
-	public synchronized void addNewRecipe(Recipe recipe) throws RecipeException {
-		RecipeDAO.getInstance().addRecipe(recipe);
+	public synchronized void addNewRecipe(Recipe recipe,String username) throws RecipeException {
+		RecipeDAO.getInstance().addRecipe(recipe,username);
 		allRecipes.add(recipe);
 	}
 	

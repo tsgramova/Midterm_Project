@@ -185,7 +185,6 @@ public class User {
 
 
 	public void addNewRecipe(Recipe r) throws RecipeException {
-		RecipeManager.getInstance().addNewRecipe(r);
 		this.added.add(r);
 	}
 	

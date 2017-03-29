@@ -11,7 +11,11 @@ public class DBManager
   private static final String DB_PORT = "3306";
   private static final String DB_NAME = "nomnom";
   private static final String DB_USERNAME = "root";
+<<<<<<< HEAD
   private static final String DB_PASSWORD = "carebear57";
+=======
+  private static final String DB_PASSWORD = "********";
+>>>>>>> 92adbca1c7aabf17fc69d6c348df9fe0d87f311c
   private static Connection connection = null;  
   private static final String URL = "jdbc:mysql://"+ DB_IP +":" + DB_PORT + "/" + DB_NAME ;
   

@@ -1,6 +1,8 @@
 package user;
 
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,6 +29,10 @@ public class UsersManager {
     }
     return instance;
   }
+  
+  public Map<String, User> getRegisteredUsers() {
+	return Collections.unmodifiableMap(registeredUsers);
+}
   
   public boolean validateLogin(String username, String password) {
     if (!registeredUsers.containsKey(username)) { //if the username doesn't exist return false
