@@ -6,7 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Моят профил</title>
-<style>body {
+<style>
+body {
     background-color: lightgrey;
 }
 button {
@@ -26,7 +27,7 @@ button:hover {
 </head>
 <body>
 
-<% if (session.getAttribute("logged") != null || (Boolean)session.getAttribute("logged")) { %>
+<% if (session.getAttribute("logged") != null && (Boolean)session.getAttribute("logged")) { %>
 	<h1> Hello, <%= session.getAttribute("username") %>! </h1>
 	<h3> Как си днес? </h3>
 	<h3> Какво искаш да направиш?</h3>
@@ -35,12 +36,9 @@ button:hover {
 	<a href="index.html"><button>Разгледай добавени си рецепти</button></a>
 	<a href="index.html"><button>Разгледай всички рецепти</button></a>
 	<a href="AddRecipe.jsp"><button>Добави рецепта</button></a>
-	
 	<% } else { %>
 	<jsp:forward page="Login.html"></jsp:forward>
-		<%} %>>
+	<%} %>
 	
-	
-
 </body>
 </html>

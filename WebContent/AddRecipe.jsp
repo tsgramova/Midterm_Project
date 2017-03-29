@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%@ page errorPage="errorPage.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Добави рецепта</title>
 </head>
 <body>
 <style>
@@ -69,7 +70,7 @@ span.psw {
 </style>
 </head>
 <body>
-	<%if (session.getAttribute("logged") != null || (Boolean)session.getAttribute("logged")) { %>
+	<%if (session.getAttribute("logged") != null && (Boolean)session.getAttribute("logged")) { %>
 	<form action="AddRecipeServlet" method = "POST" enctype="multipart/form-data">
 	  <div class="imgcontainer">
 	    <img src="nomnom.png" alt="Avatar" class="avatar">
@@ -116,7 +117,7 @@ span.psw {
  		 </div>
 	</form>
 	<%} else { %>
-	<jsp:forward page="Login.html"></jsp:forward> 
+	<jsp:forward page="login.jsp"></jsp:forward> 
 	<%} %>
   </body>
 </html>
