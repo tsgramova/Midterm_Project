@@ -21,22 +21,14 @@ public class LoginServlet extends HttpServlet {
 
 		if(UsersManager.getInstance().validateLogin(username, password)){
 			HttpSession session = request.getSession();
-			
 			session.setAttribute("username", username);
 			session.setAttribute("logged", true);
-			response.sendRedirect("Success.html");
+			response.sendRedirect("profile.jsp");
 			
 
 		}else{
 			response.sendRedirect("LoginFailed.html");
 		}
 	}
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getSession().setAttribute("logged", false);
-		resp.sendRedirect("index.html");
-	}
-
 
 }

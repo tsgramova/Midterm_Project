@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"
-    isErrorPage="true"%>
+    pageEncoding="ISO-8859-1" %>
+   <%@ page isErrorPage="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,8 +14,6 @@
 		<img src="errorIceCream.jpg">
 <% } %>>
 
-<form method="link" action="index.html">
-  <button type="submit">Върни ме на началната страница</button>
- </form>>	
+<a href="index.html"><button>Върни ме на началната страница</button></a>
 </body>
 </html>
