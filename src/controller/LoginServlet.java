@@ -23,9 +23,10 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
 			session.setAttribute("logged", true);
+			response.setHeader("Pragma", "No-cache");
+			response.setDateHeader("Expires", 0);
+			response.setHeader("Cache-control", "no-cache");
 			response.sendRedirect("profile.jsp");
-			
-
 		}else{
 			response.sendRedirect("LoginFailed.html");
 		}

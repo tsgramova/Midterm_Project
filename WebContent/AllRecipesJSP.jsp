@@ -14,15 +14,14 @@
 </head>
 <body>
 chgvjbknl
-<%
-if(session.getAttribute("logged")!= null){
+<%if(session.getAttribute("logged")!= null){
 	boolean logged = (Boolean) request.getSession().getAttribute("logged");
 	if(logged){
-		//recipes
-
 		User user =  UsersManager.getInstance().getRegisteredUsers().get(session.getAttribute("username")); 
 		for(Recipe recipe : RecipeManager.getInstance().getRecipes()) {
-			out.println(recipe.getName());
+			String str = recipe.getName() != null?recipe.getName():"test";
+			out.write(str);
+			out.flush();
 		}
 	}
 	else{
