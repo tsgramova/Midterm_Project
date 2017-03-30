@@ -19,9 +19,16 @@ public class forgotPasswordServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
-		String password = UsersManager.getInstance().getRegisteredUsers().get(username).getPassword();
-		new MailSender(email, "Забравена парола за nomnom.bg", "Вашата парола е " + password + ". Заповядайте отново!");
-		request.getRequestDispatcher("passwordsent.jsp").forward(request, response);
+		String htmlFile="";
+		if(!UsersManager.getInstance().getRegisteredUsers().containsKey(username)) {
+			htmlFile="forgotPassword.html";
+		} 
+		else{
+			htmlFile="password.jsp";
+			String password = UsersManager.getInstance().getRegisteredUsers().get(username).getPassword();
+			new MailSender(email, "Забравена парола за nomnom.bg", "Вашата парола е " + password + ". Заповядайте отново!");
+		}
+		request.getRequestDispatcher(htmlFile).forward(request, response);
 		
 	}
 

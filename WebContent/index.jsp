@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" href="nomnom.png">
 <title>nomNom</title>
-
 </head>
 <body>
 <%@ include file="menu.jsp" %>

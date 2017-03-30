@@ -56,12 +56,12 @@ img.avatar {
 }
 
 .container {
-    padding: 8px;
+    padding: 1px;
 }
 
 span.psw {
-    float: right;
-    padding-top: 16px;
+    float: left;
+    padding-top: 8px;
 }
 .app-button{
      list-style: none;
@@ -82,7 +82,6 @@ span.psw {
 	<jsp:forward page="profile.jsp"></jsp:forward>
 <%} else {%>
 	<form class= "form-signin" action="LoginServlet" method = "POST">
-	 
 	  <div class="container">
 	    <label><b>Потребителско име</b></label> </br>
 	    <input type="text" placeholder="Въведете потребителско име" name="username" required>
@@ -92,18 +91,15 @@ span.psw {
 	    </br>
 	    <input type="checkbox" checked="checked"> Запомни ме
 	    </br>
+	    
 	    <button type="submit">Вход</button>
-	  </div>
+	    
+	   <h2> Забравена <a href="forgotPassword.html">парола?</a></h2>
+	  </div>	  
 	</form>
 	
-	<form method="link" action="index.jsp">
-	<div class="container"> 
-	  <button type="submit">Върни ме на началната страница</button>
-	</div>
-	<div class="container" style="background-color:#f1f1f1">
-	    <span class="psw">Забравена <a href="forgotPassword.html">парола?</a></span>
-	  </div>
-	  </form>
+	<a href="index.jsp"><button>Върни ме на началната страница</button></a>
+
 	  <% } %>
 </head>
 <body>

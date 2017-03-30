@@ -1,5 +1,6 @@
 package recipe;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,9 +26,15 @@ public class RecipeManager {
 	    return instance;
 	  }
 	
-	public synchronized void addNewRecipe(Recipe recipe,String username) throws RecipeException {
-		RecipeDAO.getInstance().addRecipe(recipe,username);
-		allRecipes.add(recipe);
+	public synchronized void addNewRecipe(Recipe recipe,String username) throws SQLException, Exception {
+		try{
+			RecipeDAO.getInstance().addRecipe(recipe,username);
+			allRecipes.add(recipe);
+		} catch(SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException("problem in db");
+		}
+		
 	}
 	
 	public Set<Recipe> getRecipes() {

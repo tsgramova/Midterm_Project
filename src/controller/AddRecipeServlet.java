@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -69,11 +70,14 @@ public class AddRecipeServlet extends HttpServlet {
 				} else {
 					username = (String) session.getAttribute("username");
 					if(RecipeManager.getInstance().validateRecipe(name, description, duration, difficulty, foodType, 0)) {
-						RecipeManager.getInstance().addNewRecipe(r,username);
-						htmlFile = "Success.html";
+						try {	RecipeManager.getInstance().addNewRecipe(r,username);
+							htmlFile = "Success.html";
+						} catch (SQLException e) {
+							System.out.println("recipe not added!" + e.getMessage());
+						}
 					}
 					else {
-						htmlFile = "AddRecipeFailed.html";
+						htmlFile = "addRecipeFailed.jsp";
 					}
 					RequestDispatcher view = request.getRequestDispatcher(htmlFile);
 					view.forward(request, response);

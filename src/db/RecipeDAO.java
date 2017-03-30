@@ -72,8 +72,7 @@ public class RecipeDAO {
 		return Collections.unmodifiableSet(recipes);
 	}
 	
-	public synchronized void addRecipe(Recipe recipe,String username) throws RecipeException{
-		try {
+	public synchronized void addRecipe(Recipe recipe,String username) throws SQLException, Exception{
 			//first insert recipe into db
 			String sql = "INSERT INTO recipes (name, description, duration, difficulty, rating, food_type, picture) VALUES (?,?,?,?,?,?,?);";
 		     PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -114,13 +113,6 @@ public class RecipeDAO {
 				statement.close();
 				UsersManager.getInstance().getRegisteredUsers().get(username).addNewRecipe(recipe);
 		
-		} 
-		    catch (SQLException e) {
-		    	e.printStackTrace();
-		    	System.out.println("Recipe not added");
-		    } 
-		    catch (Exception e) {
-		    	System.out.println("DB went bust");
-		    }
+		
 		  }
 }

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" href="nomnom.png">
 <title>Insert title here</title>
 </head>
 <style>
@@ -99,7 +100,7 @@ span.psw {
 	    <button type="submit">Регистрация</button>
 	  </div>
 	</form>
-	<form method="link" action="Login.html">
+	<form method="link" action="login.jsp">
 		<div class="container" style="background-color:#f1f1f3">
   	 	 <button type="submit" class="cancelbtn">Отказ</button>
  		 </div>

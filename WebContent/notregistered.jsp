@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" href="nomnom.png">
-<title>Изпратена парола</title>
+<title>Не сте регис</title>
 </head>
 <body>
 <%@ include file="menu.jsp" %>
