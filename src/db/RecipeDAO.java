@@ -106,7 +106,7 @@ public class RecipeDAO {
 		     }
 				//insert into users_has_recipes
 				PreparedStatement statement = DBManager.getInstance().getConnection().prepareStatement(
-						"INSERT INTO users_has_recipes (users_users_id, recipes_recipe_id, recipe_type) VALUES ((SELECT user_id FROM users u WHERE u.name = ?), (SELECT recipe_id FROM recipes r WHERE name =?),?);");
+						"INSERT INTO users_has_recipes (users_users_id, recipes_recipe_id, recipe_type) VALUES ((SELECT users_id FROM users u WHERE u.username = ?), (SELECT recipe_id FROM recipes r WHERE name =?),?);");
 				statement.setString(1, username);
 				statement.setString(2, recipe.getName());
 				statement.setString(3, "added");

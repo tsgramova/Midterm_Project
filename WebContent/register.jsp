@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head> 
-<meta charset = "UTF-8">
-<link rel="icon" href="nomnom.png">
-<title> Регистрация</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+</head>
 <style>
-
 body {
     background-color: lightgrey;
 }
@@ -73,13 +74,14 @@ span.psw {
 }
 
 </style>
-</head>
 <body>
+<%@ include file="menu.jsp" %>
 
+<% if (session.getAttribute("logged") != null && (Boolean)session.getAttribute("logged")) { %>
+	<jsp:forward page="profile.jsp"></jsp:forward>
+<%} else {%>
 	<form class= "form-signin" action="RegisterServlet" method = "POST">
-	  <div class="imgcontainer">
-	    <img src="nomnom.png" alt="Avatar" class="avatar">
-	  </div>
+	
 	  <div class="container">
 	  	<h2 class="form-signin-heading">Регистрация на нов потребител</h2>
 	    <label><b>Потребителско име</b></label>
@@ -107,5 +109,6 @@ span.psw {
   <button type="submit">Върни ме на началната страница</button>
 </div>
 </form>
+ <% } %>
   </body>
 </html>

@@ -3,7 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" href="nomnom.png">
 <title>Вход</title>
 <style>
 
@@ -11,16 +12,17 @@ body {
     background-color: lightgrey;
 }
 form {
-    border: 3px solid #f1f1f1;
+    border: 2px solid #f1f1f1;
 }
 
 input[type=text], input[type=password] {
-    width: 100%;
+    width: 30%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    left:100px;
 }
 
 button {
@@ -30,7 +32,7 @@ button {
     margin: 4px 0;
     border: none;
     cursor: pointer;
-    width: 40%;
+    width: 20%;
 }
 
 button:hover {
@@ -74,20 +76,18 @@ span.psw {
 </style>
 </head>
 <body>
+<%@ include file="menu.jsp" %>
 
 <% if (session.getAttribute("logged") != null && (Boolean)session.getAttribute("logged")) { %>
 	<jsp:forward page="profile.jsp"></jsp:forward>
 <%} else {%>
 	<form class= "form-signin" action="LoginServlet" method = "POST">
-	  <div class="imgcontainer">
-	    <img src="nomnom.png" alt="Avatar" class="avatar">
-	  </div>
-	
+	 
 	  <div class="container">
-	    <label><b>Потребителско име</b></label>
+	    <label><b>Потребителско име</b></label> </br>
 	    <input type="text" placeholder="Въведете потребителско име" name="username" required>
 		</br>
-	    <label><b>Парола</b></label>
+	    <label><b>Парола</b></label> </br>
 	    <input type="password" placeholder="Въведете парола" name="password" required>
 	    </br>
 	    <input type="checkbox" checked="checked"> Запомни ме
@@ -95,17 +95,13 @@ span.psw {
 	    <button type="submit">Вход</button>
 	  </div>
 	</form>
-	<form method="link" action="Register.html">
-	<div class="container"> 
-	  <button type="submit">Регистрация</button>
-	</div>
-	</form>
-	<form method="link" action="index.html">
+	
+	<form method="link" action="index.jsp">
 	<div class="container"> 
 	  <button type="submit">Върни ме на началната страница</button>
 	</div>
 	<div class="container" style="background-color:#f1f1f1">
-	    <span class="psw">Забравена <a href="#">парола?</a></span>
+	    <span class="psw">Забравена <a href="forgotPassword.html">парола?</a></span>
 	  </div>
 	  </form>
 	  <% } %>

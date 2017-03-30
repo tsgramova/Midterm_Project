@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="icon" href="nomnom.png">
 <title>Грешка</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
 		<% out.print(response.getStatus()); %>
 <% } else { %>
 		<img src="errorIceCream.jpg">
-		<% out.print(response.getStatus()); %>
+		<% System.out.print(exception.getMessage()); %>
 <% } %>
 
 <a href="index.html"><button>Върни ме на началната страница</button></a>
