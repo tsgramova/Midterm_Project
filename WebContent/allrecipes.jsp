@@ -1,3 +1,6 @@
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Scanner"%>
 <%@page import="java.util.Map"%>
 <%@page import="products.Product"%>
@@ -6,7 +9,7 @@
 <%@page import="java.util.HashSet"%>
 <%@page import="recipe.Recipe"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -76,19 +79,8 @@ return allRecipes;
 %>
 
 <%for(Recipe recipe : getRecipes()) {
-	
-String image = "";
-
-Scanner sc = new Scanner(recipe.getPicture());
-while(sc.hasNext()) {
-	image = image + sc.next();
-}
-sc.close();
 %>
-<form action="image.jsp">
-  <input type="hidden" name="image" value="image">
-</form>
-<%@ include file="image.jsp" %>
+
 <h2>Име:</h2><%=recipe.getName()%>
 <h2>Трудност:</h2><%=(recipe.getDifficulty() == 1?"лесна":recipe.getDifficulty() == 2?"средна":"трудна")%>
 <h2>Тип:</h2><%=(recipe.getDifficulty() == 1?"предястие":recipe.getDifficulty() == 2?"основно":"десерт")%>

@@ -84,21 +84,11 @@ for(Map.Entry<String, User> entry : UsersManager.getInstance().getRegisteredUser
 allRecipes.addAll(user.getAdded());
 
 for(Recipe recipe : allRecipes) {
-String image = "";
-
-Scanner sc = new Scanner(recipe.getPicture());
-while(sc.hasNext()) {
-	image = image + sc.next();
-}
-sc.close();
 %>
-<form action="image.jsp">
-  <input type="hidden" name="image" value="image">
-</form>
-<%@ include file="image.jsp" %>
+
 <u>Име:</u><%=recipe.getName()%>
 <u>Трудност:</u><%=(recipe.getDifficulty() == 1?"лесна":recipe.getDifficulty() == 2?"средна":"трудна")%>
-<u>Тип:</u><%=(recipe.getDifficulty() == 1?"предястие":recipe.getDifficulty() == 2?"основно":"десерт"%>
+<h2>Тип:</h2><%=(recipe.getDifficulty() == 1?"предястие":recipe.getDifficulty() == 2?"основно":"десерт")%>
 <u>Продукти:</u>
 <%for(Map.Entry<Product, Integer> p : recipe.getProducts().entrySet()) {%>
 <ul>
