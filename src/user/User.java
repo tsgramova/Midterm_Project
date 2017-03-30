@@ -1,7 +1,9 @@
  package user;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 import products.Product;
 import recipe.Recipe;
@@ -144,34 +146,15 @@ public class User {
 
 
 
-	public void setFavorites(HashSet<Recipe> favorites) {
-		this.favorites = favorites;
-	}
-
-
-
 	public HashSet<Recipe> getCooked() {
 		return cooked;
 	}
 
 
 
-	public void setCooked(HashSet<Recipe> cooked) {
-		this.cooked = cooked;
+	public Set<Recipe> getAdded() {
+		return Collections.unmodifiableSet(added);
 	}
-
-
-
-	public HashSet<Recipe> getAdded() {
-		return added;
-	}
-
-
-
-	public void setAdded(HashSet<Recipe> added) {
-		this.added = added;
-	}
-
 
 
 	public long getUserId() {
@@ -184,8 +167,9 @@ public class User {
 
 
 
-	public void addNewRecipe(Recipe r) throws RecipeException {
+	public void addNewRecipe(Recipe r) {
 		this.added.add(r);
+		System.out.println("A recipe added to user's recipes!");
 	}
 	
 	public void addRecipeToFavorites(Recipe r) {

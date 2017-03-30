@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import recipe.Recipe;
+import recipe.RecipeManager;
 import user.User;
 
 public class UserDao {
@@ -36,7 +39,17 @@ public class UserDao {
     			  			resultSet.getString("role").equals("admin"));
     	  users.add(u);
     	  u.setUserId(resultSet.getLong("users_id"));
-    	  
+    	  String sql = "SELECT recipes_recipe_id FROM users_has_recipes WHERE users_users_id=?";
+    	  PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(sql);
+    	  ps.setLong(1, u.getUserId());
+    	  ResultSet resultSet2 = ps.executeQuery();
+    	  while(resultSet2.next()) {
+    		  for(Recipe r : RecipeManager.getInstance().getRecipes()) {
+    			  if(r.getRecipeId()==resultSet2.getLong("recipes_recipe_id")) {
+    				  u.addNewRecipe(r);
+    			  }
+    		  }
+    	  }
       }
       
     }

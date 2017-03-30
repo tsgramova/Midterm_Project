@@ -35,7 +35,7 @@ button:hover {
 	<h3> Какво искаш да направиш?</h3>
 	<a href="index.jsp"><button>Върни ме на началната страница</button></a>
 	<a href="Logout"><button type="submit" method="get">Излез от профила</button></a>
-	<a href="index.html"><button>Разгледай добавени си рецепти</button></a>
+	<a href="userrecipes.jsp"><button>Разгледай добавени си рецепти</button></a>
 	<a href="AddRecipe.jsp"><button>Добави рецепта</button></a>
 	<% } else { %>
 	<jsp:forward page="login.jsp"></jsp:forward>

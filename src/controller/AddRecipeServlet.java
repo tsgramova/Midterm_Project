@@ -74,6 +74,8 @@ public class AddRecipeServlet extends HttpServlet {
 							htmlFile = "Success.html";
 						} catch (SQLException e) {
 							System.out.println("recipe not added!" + e.getMessage());
+							htmlFile = "addRecipeFailed.jsp";
+
 						}
 					}
 					else {

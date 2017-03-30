@@ -1,3 +1,4 @@
+<%@page import="java.util.Set"%>
 <%@page import="java.util.Scanner"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.Map.Entry"%>
@@ -7,13 +8,13 @@
 <%@page import="products.Product"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="recipe.Recipe"%>
-<%@ page language="java" contentType="text/html; UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" href="nomnom.png">
-<title>Добави рецепта</title>
+<title>Твоите рецепти</title>
 </head>
 <style>
 body {
@@ -73,31 +74,27 @@ if(session.getAttribute("logged")==null || !(boolean) session.getAttribute("logg
 <jsp:forward page="login.jsp"></jsp:forward>
 <% } else {
 
-HashSet<Recipe> allRecipes = new HashSet<>();
-User user = null;
-for(Map.Entry<String, User> entry : UsersManager.getInstance().getRegisteredUsers().entrySet()) {
-	if(session.getAttribute("username").equals(entry.getKey())) {
-		user = entry.getValue();
-		break;
-	}
-}
+Set<Recipe> allRecipes = new HashSet<>();
+User user = UsersManager.getInstance().getRegisteredUsers().get(session.getAttribute("username"));
+
 allRecipes.addAll(user.getAdded());
+
 
 for(Recipe recipe : allRecipes) {
 %>
 
-<u>Име:</u><%=recipe.getName()%>
-<u>Трудност:</u><%=(recipe.getDifficulty() == 1?"лесна":recipe.getDifficulty() == 2?"средна":"трудна")%>
-<h2>Тип:</h2><%=(recipe.getDifficulty() == 1?"предястие":recipe.getDifficulty() == 2?"основно":"десерт")%>
-<u>Продукти:</u>
+<h2><u>Име: </u><%=recipe.getName()%> </br>
+<u>Трудност: </u><%=(recipe.getDifficulty() == 1?"лесна":recipe.getDifficulty() == 2?"средна":"трудна")%> </br>
+<u>Тип: </u><%=(recipe.getType() == 1?"предястие":recipe.getType() == 2?"основно":"десерт")%> </br>
+<u>Продукти: </u>
 <%for(Map.Entry<Product, Integer> p : recipe.getProducts().entrySet()) {%>
 <ul>
 <li><%=p.getKey().getName() %> - <%=p.getValue() %></li>
 </ul>
 <%} %>
-<u>Описание:</u><%=recipe.getDescription() %>
-<u>Време за приготвяне:</u><%=recipe.getDuration() %>
-
+<u>Описание: </u><%=recipe.getDescription() %> </br>
+<u>Време за приготвяне: </u><%=recipe.getDuration() %>
+</h2>
 <%}
 }%>
 
