@@ -4,13 +4,12 @@
 <%@page import="recipe.RecipeManager"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="recipe.Recipe"%>
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; UTF-8">
 <title>Всички рецепти</title>
 </head>
 <%!
@@ -21,7 +20,13 @@ return allRecipes;
 }
 %>
 <body>
-<%for(Recipe recipe : getRecipes()) {%>
+<%
+
+if(session.getAttribute("logged")==null || !(boolean) session.getAttribute("logged")) {%>
+	<jsp:forward page="login.jsp"></jsp:forward>
+<% } else {
+
+for(Recipe recipe : getRecipes()) {%>
 <h2>Име:</h2><%=recipe.getName()%>
 <h2>Трудност:</h2><%=recipe.getDifficulty() %>
 <h2>Тип:</h2><%=recipe.getType() %>
@@ -34,7 +39,7 @@ return allRecipes;
 <h2>Описание:</h2><%=recipe.getDescription() %>
 <h2>Време за приготвяне:</h2><%=recipe.getDuration() %>
 
-<%}%>
-
+<%}
+}%>
 </body>
 </html>
