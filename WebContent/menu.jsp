@@ -62,6 +62,5 @@ img.avatar {
 <a href="contactus.html"><button>Свържете се с нас</button></a>
 
 </div>
-
 </body>
 </html>

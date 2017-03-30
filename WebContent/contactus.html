@@ -13,7 +13,7 @@ form {
     border: 3px solid #f1f1f1;
 }
 
-input[type=text] {
+input[type=text][type=email] {
     width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -88,10 +88,10 @@ span.psw {
 
 <div class = "container">
 <form action="contactus" method = "POST">
-    <label><b>Потребителско име</b></label></br>
-    <input type="text" placeholder="Въведете потребителско име" name="username" required></br>
-    <label><b>Коментар</b></label></br>
-    <textarea name="textarea" cols="89" rows="10" placeholder="Споделете своето мнение с нас" required></textarea></br>
+    <label><b> Имейл</b></label></br>
+    <input type="email" placeholder="Въведете имейл" name="email" required></br>
+    <label><b>Коментар</b></label></br>    
+    <textarea name="message" cols="89" rows="10" placeholder="Споделете своето мнение с нас"  required></textarea></br>
 	<button type="submit">Изпрати</button>
 </form>
 <form method="link" action="index.jsp"> 
