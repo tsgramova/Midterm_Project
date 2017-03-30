@@ -58,7 +58,7 @@ img.avatar {
 <a href="profile.jsp"><button type="submit" method="get" >Моят профил</button></a>
 <a href="login.jsp"><button>Влез в профил</button></a>
 <a href="register.jsp"><button>Регистрирай се</button></a>
-<a href="recipes.html"><button>Рецепти</button></a>
+<a href="allrecipes.jsp"><button>Рецепти</button></a>
 <a href="contactus.html"><button>Свържете се с нас</button></a>
 
 </div>

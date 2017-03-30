@@ -81,17 +81,18 @@ return allRecipes;
 <%for(Recipe recipe : getRecipes()) {
 %>
 
-<h2>Име:</h2><%=recipe.getName()%>
-<h2>Трудност:</h2><%=(recipe.getDifficulty() == 1?"лесна":recipe.getDifficulty() == 2?"средна":"трудна")%>
-<h2>Тип:</h2><%=(recipe.getDifficulty() == 1?"предястие":recipe.getDifficulty() == 2?"основно":"десерт")%>
-<h2>Продукти:</h2>
+<h2><u>Име: </u><%=recipe.getName()%> </br>
+<u>Трудност: </u><%=(recipe.getDifficulty() == 1?"лесна":recipe.getDifficulty() == 2?"средна":"трудна")%> </br>
+<u>Тип: </u><%=(recipe.getType() == 1?"предястие":recipe.getType() == 2?"основно":"десерт")%> </br>
+<u>Продукти: </u>
 <%for(Map.Entry<Product, Integer> p : recipe.getProducts().entrySet()) {%>
 <ul>
 <li><%=p.getKey().getName() %> - <%=p.getValue() %></li>
 </ul>
 <%} %>
-<h2>Описание:</h2><%=recipe.getDescription() %>
-<h2>Време за приготвяне:</h2><%=recipe.getDuration() %>
+<u>Описание: </u><%=recipe.getDescription() %> </br>
+<u>Време за приготвяне: </u><%=recipe.getDuration() %>
+</h2>
 
 <%}%>
 
